@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <math.h>
-#include <Arduino.h>
+#include <Arduino.h>                 //Three-axis gyroscope
 
 #define L3G4200D_WHO_AM_I      0x0F  
 
@@ -40,7 +40,7 @@ class Gyro
     public:  
         typedef struct vector  
         {  
-            signed int x, y, z;  
+            float x, y, z;  
         } vector;  
   
         vector g; // gyro angular velocity reading
@@ -69,9 +69,9 @@ void Gyro::read()
     uint8_t zla = Wire.read();  
     uint8_t zha = Wire.read();  
   
-    g.x = xha << 8 | xla;  
-    g.y = yha << 8 | yla;  
-    g.z = zha << 8 | zla;  
+    g.x = (signed int)(xha << 8 | xla) * 0.00875;  
+    g.y = (signed int)(yha << 8 | yla) * 0.00875;  
+    g.z = (signed int)(zha << 8 | zla) * 0.00875;  
 } 
 // Turns on the L3G4200D's gyro and places it in normal mode.  
 void Gyro::enableDefault(void)  

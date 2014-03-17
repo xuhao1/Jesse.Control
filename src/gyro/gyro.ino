@@ -14,11 +14,11 @@ void loop() {
   
   Serial.print("G ");  
   Serial.print("X: ");  
-  Serial.print((int)gyro.g.x);  
+  Serial.print(gyro.g.x, 4); 
   Serial.print(" Y: ");  
-  Serial.print((int)gyro.g.y);  
+  Serial.print(gyro.g.y, 4);  
   Serial.print(" Z: ");  
-  Serial.println((int)gyro.g.z);  
+  Serial.println(gyro.g.z, 4);  
   
   delay(1000);  
 }
